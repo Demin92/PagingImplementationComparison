@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/repository_name"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="[Android]"/>
+
+    <TextView
+        android:id="@+id/stars_count"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="[Android]" />
+
+    <TextView
+        android:id="@+id/forks_count"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="[Android]" />
+
+    <TextView
+        android:id="@+id/issues_count"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="[Android]"/>
+
+</LinearLayout>

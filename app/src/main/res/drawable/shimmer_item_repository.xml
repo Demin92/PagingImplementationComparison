@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:bottom="80dp"
+        android:end="80dp">
+        <shape>
+            <solid android:color="@color/shimmer" />
+        </shape>
+    </item>
+
+    <item
+        android:bottom="60dp"
+        android:top="30dp"
+        android:end="120dp">
+        <shape>
+            <solid android:color="@color/shimmer" />
+        </shape>
+    </item>
+
+    <item
+        android:bottom="40dp"
+        android:top="50dp"
+        android:end="120dp">
+        <shape>
+            <solid android:color="@color/shimmer" />
+        </shape>
+    </item>
+
+    <item
+        android:bottom="20dp"
+        android:top="70dp"
+        android:end="120dp">
+        <shape>
+            <solid android:color="@color/shimmer" />
+        </shape>
+    </item>
+
+
+</layer-list>
