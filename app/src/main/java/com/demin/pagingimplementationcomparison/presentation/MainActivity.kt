@@ -1,9 +1,9 @@
 package com.demin.pagingimplementationcomparison.presentation
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import com.demin.pagingimplementationcomparison.R
@@ -65,9 +65,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecycler() {
         with(content) {
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@MainActivity)
             adapter = this@MainActivity.adapter
-            addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+            addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(this@MainActivity, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
         }
     }
 
