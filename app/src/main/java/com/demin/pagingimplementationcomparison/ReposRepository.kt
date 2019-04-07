@@ -18,7 +18,7 @@ class ReposRepository {
                 pageNumber = 1
         )
                 .map {
-                    Thread.sleep(1000)
+                    Thread.sleep(5000)
                     it.items }
                 .flatMapObservable { Observable.fromIterable(it) }
                 .map { it.convert() }

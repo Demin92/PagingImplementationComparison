@@ -1,15 +1,15 @@
 package com.demin.pagingimplementationcomparison.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.view.animation.AnimationUtils
-import android.widget.LinearLayout
 import com.demin.pagingimplementationcomparison.R
-import com.demin.pagingimplementationcomparison.ReposRepository
-import com.demin.pagingimplementationcomparison.entity.Repository
 import com.demin.pagingimplementationcomparison.presentation.recycler.RepoItem
+import com.demin.pagingimplementationcomparison.presentation.viewmodel.*
 import com.redmadrobot.lib.sd.base.ShowOnEnterGoneOnExitStrategy
 import com.redmadrobot.lib.sd.base.State
 import com.redmadrobot.lib.sd.base.StateDelegate
@@ -18,32 +18,22 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private val reposRepository = ReposRepository()
     private lateinit var stateDelegator: StateDelegate<GitReposViewState>
     private val adapter = GroupAdapter<ViewHolder>()
+    private lateinit var reposViewModel: ReposViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        reposViewModel = ViewModelProviders.of(this).get(ReposViewModel::class.java)
+        reposViewModel.reposLiveData.observe(this, Observer { state -> render(state) })
         initView()
     }
 
     private fun initView() {
         initStateDelegator()
         initRecycler()
-        search.setOnClickListener {
-            setState(GitReposViewState.EMPTY_PROGRESS)
-            reposRepository.getRepositories(search_text.text.toString())
-                    .subscribe({ repos ->
-                        if (repos.isEmpty()) {
-                            setState(GitReposViewState.STUB)
-                        } else {
-                            setState(GitReposViewState.DATA, repos)
-                        }
-                    }, {
-                        setState(GitReposViewState.ERROR)
-                    })
-        }
+        search.setOnClickListener {reposViewModel.loadRepos(search_text.text.toString())}
     }
 
     private fun initStateDelegator() {
@@ -52,22 +42,29 @@ class MainActivity : AppCompatActivity() {
                 State(GitReposViewState.EMPTY_PROGRESS, listOf(empty_loading), ShimmerLoadingStateChangeStrategy()),
                 State(GitReposViewState.STUB, listOf(stub, retry)),
                 State(GitReposViewState.ERROR, listOf(error, retry))
-
         )
     }
 
-    private fun setState(state: GitReposViewState, repos: List<Repository>? = null) {
-        stateDelegator.currentState = state
-        if (state == GitReposViewState.DATA) {
-            repos?.map { RepoItem(it) }?.let { adapter.addAll(it) }
+    private fun render(viewState: ReposViewState) {
+        when (viewState) {
+            is Loading -> stateDelegator.currentState = GitReposViewState.EMPTY_PROGRESS
+            is Error -> stateDelegator.currentState = GitReposViewState.ERROR
+            is Data -> {
+                if (viewState.repos.isEmpty()) {
+                    stateDelegator.currentState = GitReposViewState.STUB
+                } else {
+                    stateDelegator.currentState = GitReposViewState.DATA
+                    viewState.repos.map { RepoItem(it) }.let { adapter.addAll(it) }
+                }
+            }
         }
     }
 
     private fun initRecycler() {
         with(content) {
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@MainActivity)
+            layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = this@MainActivity.adapter
-            addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(this@MainActivity, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
+            addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
         }
     }
 
