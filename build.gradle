@@ -39,4 +39,5 @@ ext {
     loggingInterceptorVersion = '3.0.0'
     stateDelegatorVersion = '1.5'
     groupieVersion = "2.3.0"
+    daggerVersion = "2.15"
 }

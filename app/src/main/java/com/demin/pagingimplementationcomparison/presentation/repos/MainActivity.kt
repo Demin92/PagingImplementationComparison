@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        reposViewModel = ViewModelProviders.of(this).get(ReposViewModel::class.java)
+        reposViewModel = ViewModelProviders.of(this, ReposViewModel.Factory())[ReposViewModel::class.java]
         reposViewModel.reposLiveData.observe(this, Observer { state -> render(state) })
         initView()
     }
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         initStateDelegator()
         initRecycler()
-        search.setOnClickListener {reposViewModel.loadRepos(search_text.text.toString())}
+        search.setOnClickListener { reposViewModel.loadRepos(search_text.text.toString()) }
     }
 
     private fun initStateDelegator() {
