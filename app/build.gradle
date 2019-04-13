@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -23,6 +21,9 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':data')
+    implementation project(path: ':domain')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
@@ -30,20 +31,11 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constrainedLayoutVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
 
-    implementation ("com.github.ihsanbal:LoggingInterceptor:$loggingInterceptorVersion", {
-        exclude group: 'org.json', module: 'json'
-    })
-
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.redmadrobot:state-delegator:$stateDelegatorVersion"
+    implementation "com.xwray:groupie:$groupieVersion"
 
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-
-    implementation "com.redmadrobot:state-delegator:$stateDelegatorVersion"
-
-    implementation "com.xwray:groupie:$groupieVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0-alpha03'
