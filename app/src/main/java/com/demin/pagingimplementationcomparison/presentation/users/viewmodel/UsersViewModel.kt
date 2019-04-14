@@ -30,7 +30,7 @@ class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel()
         internal lateinit var usersRepository: UsersRepository
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            DI.reposComponent.inject(this)
+            DI.getUsersComponent().inject(this)
             return UsersViewModel(usersRepository) as T
         }
     }

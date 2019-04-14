@@ -1,14 +1,16 @@
 package com.demin.pagingimplementationcomparison.di
 
-import com.demin.pagingimplementationcomparison.di.repos.DaggerReposComponent
-import com.demin.pagingimplementationcomparison.di.repos.ReposComponent
-
+import com.demin.pagingimplementationcomparison.di.app.AppComponent
+import com.demin.pagingimplementationcomparison.di.app.DaggerAppComponent
 object DI {
 
-    lateinit var reposComponent: ReposComponent
+    lateinit var appComponent: AppComponent
 
     fun init() {
-        reposComponent = DaggerReposComponent.builder()
+        appComponent = DaggerAppComponent.builder()
                 .build()
     }
+
+    fun getUsersComponent() = appComponent.usersBuilder().build()
+
 }

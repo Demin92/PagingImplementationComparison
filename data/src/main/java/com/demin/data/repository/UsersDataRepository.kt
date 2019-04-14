@@ -8,9 +8,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class UsersDataRepository: UsersRepository {
-
-    private val serviceFactory = ServiceFactory()
+class UsersDataRepository(private val serviceFactory: ServiceFactory): UsersRepository {
 
     override fun getUsers(searchString: String): Single<List<User>> {
         return serviceFactory.gitHubService.searchUsers(
@@ -19,7 +17,7 @@ class UsersDataRepository: UsersRepository {
                 pageNumber = 1
         )
                 .map {
-                    Thread.sleep(5000)
+                    Thread.sleep(3000)
                     it.items }
                 .flatMapObservable { Observable.fromIterable(it) }
                 .map { it.convert() }
