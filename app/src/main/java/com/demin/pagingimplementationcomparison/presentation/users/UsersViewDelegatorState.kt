@@ -1,6 +1,6 @@
 package com.demin.pagingimplementationcomparison.presentation.users
 
-enum class GitReposViewState {
+enum class UsersViewDelegatorState {
     EMPTY_PROGRESS,
     STUB,
     DATA,

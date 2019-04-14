@@ -5,10 +5,10 @@ import com.demin.domain.model.User
 import com.demin.pagingimplementationcomparison.R
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.item_repository.view.*
+import kotlinx.android.synthetic.main.item_user.view.*
 
 class UserItem(private val user: User) : Item<ViewHolder>() {
-    override fun getLayout() = R.layout.item_repository
+    override fun getLayout() = R.layout.item_user
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         with(viewHolder.itemView) {

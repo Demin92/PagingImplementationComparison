@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface GitHubService {
     @GET("search/users?sort=score")
-    fun searchRepos(
+    fun searchUsers(
             @Query("q") searchString: String,
             @Query("page") pageNumber: Int,
             @Query("per_page") pageSize: Int

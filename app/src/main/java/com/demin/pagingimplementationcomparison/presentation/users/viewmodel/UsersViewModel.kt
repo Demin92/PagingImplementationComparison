@@ -13,15 +13,15 @@ class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel()
         private const val LOG_TAG = "UsersViewModel"
     }
 
-    val reposLiveData = MutableLiveData<ReposViewState>()
+    val usersLiveData = MutableLiveData<UsersViewState>()
 
-    fun loadRepos(searchQuery: String) {
-        usersRepository.getRepositories(searchQuery)
-                .map<ReposViewState>(::Data)
+    fun loadUsers(searchQuery: String) {
+        usersRepository.getUsers(searchQuery)
+                .map<UsersViewState>(::Data)
                 .toObservable()
                 .startWith(Loading)
                 .onErrorReturn { Error }
-                .subscribe({ reposLiveData.value = it }, {th -> Log.e(LOG_TAG, "repo", th)})
+                .subscribe({ usersLiveData.value = it }, { th -> Log.e(LOG_TAG, "users loading", th)})
     }
 
     @Suppress("UNCHECKED_CAST")

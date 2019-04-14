@@ -12,8 +12,8 @@ class UsersDataRepository: UsersRepository {
 
     private val serviceFactory = ServiceFactory()
 
-    override fun getRepositories(searchString: String): Single<List<User>> {
-        return serviceFactory.gitHubService.searchRepos(
+    override fun getUsers(searchString: String): Single<List<User>> {
+        return serviceFactory.gitHubService.searchUsers(
                 searchString = searchString,
                 pageSize = 10,
                 pageNumber = 1
