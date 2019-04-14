@@ -1,23 +1,22 @@
-package com.demin.pagingimplementationcomparison.presentation.repos.viewmodel
+package com.demin.pagingimplementationcomparison.presentation.users.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.demin.data.repository.ReposDataRepository
-import com.demin.domain.repository.ReposRepository
+import com.demin.domain.repository.UsersRepository
 import com.demin.pagingimplementationcomparison.di.DI
 import javax.inject.Inject
 
-class ReposViewModel(private val reposRepository: ReposRepository) : ViewModel() {
+class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel() {
     companion object {
-        private const val LOG_TAG = "ReposViewModel"
+        private const val LOG_TAG = "UsersViewModel"
     }
 
     val reposLiveData = MutableLiveData<ReposViewState>()
 
     fun loadRepos(searchQuery: String) {
-        reposRepository.getRepositories(searchQuery)
+        usersRepository.getRepositories(searchQuery)
                 .map<ReposViewState>(::Data)
                 .toObservable()
                 .startWith(Loading)
@@ -28,11 +27,11 @@ class ReposViewModel(private val reposRepository: ReposRepository) : ViewModel()
     @Suppress("UNCHECKED_CAST")
     class Factory: ViewModelProvider.NewInstanceFactory() {
         @Inject
-        internal lateinit var reposRepository: ReposRepository
+        internal lateinit var usersRepository: UsersRepository
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             DI.reposComponent.inject(this)
-            return ReposViewModel(reposRepository) as T
+            return UsersViewModel(usersRepository) as T
         }
     }
 }

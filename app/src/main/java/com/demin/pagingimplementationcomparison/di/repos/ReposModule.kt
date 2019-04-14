@@ -1,17 +1,16 @@
 package com.demin.pagingimplementationcomparison.di.repos
 
-import com.demin.data.repository.ReposDataRepository
-import com.demin.domain.repository.ReposRepository
+import com.demin.data.repository.UsersDataRepository
+import com.demin.domain.repository.UsersRepository
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 
 @Module
 class ReposModule {
 
     @Provides
-    fun provideReposRepository(): ReposRepository {
-        return ReposDataRepository()
+    fun provideReposRepository(): UsersRepository {
+        return UsersDataRepository()
     }
 }

@@ -1,18 +1,18 @@
 package com.demin.data.repository
 
 import com.demin.data.network.ServiceFactory
-import com.demin.domain.model.Repository
-import com.demin.domain.repository.ReposRepository
+import com.demin.domain.model.User
+import com.demin.domain.repository.UsersRepository
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class ReposDataRepository: ReposRepository {
+class UsersDataRepository: UsersRepository {
 
     private val serviceFactory = ServiceFactory()
 
-    override fun getRepositories(searchString: String): Single<List<Repository>> {
+    override fun getRepositories(searchString: String): Single<List<User>> {
         return serviceFactory.gitHubService.searchRepos(
                 searchString = searchString,
                 pageSize = 10,

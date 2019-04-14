@@ -1,4 +1,4 @@
-package com.demin.pagingimplementationcomparison.presentation.repos
+package com.demin.pagingimplementationcomparison.presentation.users
 
 import android.os.Bundle
 import android.view.animation.AnimationUtils
@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demin.pagingimplementationcomparison.R
-import com.demin.pagingimplementationcomparison.presentation.repos.recycler.RepoItem
-import com.demin.pagingimplementationcomparison.presentation.repos.viewmodel.*
+import com.demin.pagingimplementationcomparison.presentation.users.recycler.UserItem
+import com.demin.pagingimplementationcomparison.presentation.users.viewmodel.*
 import com.redmadrobot.lib.sd.base.ShowOnEnterGoneOnExitStrategy
 import com.redmadrobot.lib.sd.base.State
 import com.redmadrobot.lib.sd.base.StateDelegate
@@ -20,20 +20,20 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private lateinit var stateDelegator: StateDelegate<GitReposViewState>
     private val adapter = GroupAdapter<ViewHolder>()
-    private lateinit var reposViewModel: ReposViewModel
+    private lateinit var usersViewModel: UsersViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        reposViewModel = ViewModelProviders.of(this, ReposViewModel.Factory())[ReposViewModel::class.java]
-        reposViewModel.reposLiveData.observe(this, Observer { state -> render(state) })
+        usersViewModel = ViewModelProviders.of(this, UsersViewModel.Factory())[UsersViewModel::class.java]
+        usersViewModel.reposLiveData.observe(this, Observer { state -> render(state) })
         initView()
     }
 
     private fun initView() {
         initStateDelegator()
         initRecycler()
-        search.setOnClickListener { reposViewModel.loadRepos(search_text.text.toString()) }
+        search.setOnClickListener { usersViewModel.loadRepos(search_text.text.toString()) }
     }
 
     private fun initStateDelegator() {
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                     stateDelegator.currentState = GitReposViewState.STUB
                 } else {
                     stateDelegator.currentState = GitReposViewState.DATA
-                    viewState.repos.map { RepoItem(it) }.let { adapter.addAll(it) }
+                    viewState.repos.map { UserItem(it) }.let { adapter.addAll(it) }
                 }
             }
         }

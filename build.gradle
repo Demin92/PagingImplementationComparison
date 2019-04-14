@@ -40,4 +40,5 @@ ext {
     stateDelegatorVersion = '1.5'
     groupieVersion = "2.3.0"
     daggerVersion = "2.15"
+    glideVersion = "4.8.0"
 }

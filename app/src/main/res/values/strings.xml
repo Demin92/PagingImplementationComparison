@@ -4,8 +4,6 @@
     <string name="error">Error!</string>
     <string name="retry">Retry</string>
     <string name="stub">No data</string>
-    <string name="stars_count">stars: %d</string>
-    <string name="forks_count">forks: %d</string>
-    <string name="issues_count">issues: %d</string>
+    <string name="score">score: %f</string>
     <string name="android">Android</string>
 </resources>
